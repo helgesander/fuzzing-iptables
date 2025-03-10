@@ -36,7 +36,7 @@ RUN apt-get install -y \
     libnfnetlink-dev \
     libmnl-dev \
     libnftnl-dev \
-    libpcap-dev
+    libpcap-dev 
 
 WORKDIR /root
 RUN wget https://www.netfilter.org/projects/iptables/files/iptables-1.8.2.tar.bz2 && \
