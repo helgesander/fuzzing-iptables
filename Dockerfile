@@ -22,6 +22,17 @@ RUN apt-get install -y gcc-$(gcc --version|head -n1|sed 's/\..*//'|sed 's/.* //'
 WORKDIR /tmp
 RUN git clone https://github.com/AFLplusplus/AFLplusplus && cd AFLplusplus && make distrib NO_NYX=1 NO_QEMU=1 && make install
 
+#--------------PVS---------------
+# Устанавливаем PVS-Studio
+RUN wget -q -O - https://files.pvs-studio.com/etc/pubkey.txt | apt-key add - \
+ && wget -O /etc/apt/sources.list.d/viva64.list \
+    https://files.pvs-studio.com/etc/viva64.list \
+ && apt update -yq \
+ && apt install -yq pvs-studio strace \
+ && pvs-studio --version \
+ && apt clean -yq
+RUN pvs-studio-analyzer credentials PVS-Studio Free FREE-FREE-FREE-FREE
+
 # --------------IPTABLES--------------
 # Устанавливаем зависимости для iptables
 RUN apt-get install -y \
