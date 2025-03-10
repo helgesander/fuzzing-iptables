@@ -67,10 +67,9 @@ RUN groupadd -g $HOST_GID hostgroup && \
     useradd -u $HOST_UID -g hostgroup afl
 
 # Настройка окружения 
-RUN echo 'export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;31m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]# "' >> /root/.bashrc && \
+RUN echo 'export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;31m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]# "' >> /root/.bashrc
 #	echo 'export PS1="\[\e]0;\u@\h: \w\a\]\[\033[01;31m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]# "' >> /home/afl/.bashrc && \
-	sysctl -w kernel.core_pattern="core"
 
-WORKDIR /root/iptables
+WORKDIR /pwd
 # USER afl
 CMD ["tail", "-f", "/dev/null"]
